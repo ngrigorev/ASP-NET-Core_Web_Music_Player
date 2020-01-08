@@ -4,28 +4,38 @@
     ViewData["Title"] = "Home page";
 }
 
-
-<h1 class="display-4">Welcome to YouPlay</h1>
-<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Coreset</a>.</p>
-
-<div class="row bg-dark text-light" style="padding: 2rem">
-    <div class="col-9">
-        <div class="row align-items-start">
-            <div class="col-2">
+<div class="fullMaster text-light">
+    <div style="height: 100%;">
+        <div class="backgroundGradient">
+            <div class="backgroundGradient__buffer backgroundGradient__hidden"></div>
+            <div class="backgroundGradient__buffer bg-dark"></div>
+            <div class="backgroundGradient__imageOverlay"></div>
+        </div>
+    </div>
+    <div class="fullMaster__foreground">
+        <div class="fullMaster__artwork">
+            <div class="image m-sound image__lightOutline readOnly customImage interactive sc-artwork sc-artwork-placeholder-10 m-loaded" tabindex="0" style="height: 100%; width: 100%;">
+                <span style="background-image: url(https://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Visual_Principal_340/8/5/7/0600753012758/tsp20120923065845/Generation-zouk.jpg); width: 100%; height: 100%; opacity: 1;" class="sc-artwork sc-artwork-placeholder-10  image__full g-opacity-transition" aria-label="Woah" aria-role="img"></span>
+            </div>
+        </div>
+        <div class="fullMaster__title">
+            <div class="soundTitle__playButton">
                 <a role="button" onclick="wavesurfer.playPause()" style="cursor: pointer;">
-                    <span style="font-size: 4rem; color: Tomato;">
+                    <span style="font-size: 3rem; color: #14ad0c;">
                         <i class="fas fa-play-circle"></i>
                     </span>
                 </a>
             </div>
-            <div class="col-6">
-                <h2>
-                    GROS SON SALLE
-                </h2>
-                <h4>
-                    Booba
-                </h4>
+            <div class="soundTitle__nameContainer">
+                <div class="soundTitle__creator">
+                    Johnny le Dep
+                </div>
+                <div class="soundTitle__title">
+                    Génération Zouk !
+                </div>
             </div>
+        </div>
+        <div class="fullMaster__info">
             <span style="font-size: 1.8rem;">
                 <a role="button" onclick="wavesurfer.toggleMute()" style="cursor: pointer;">
                     <i class="fas fa-volume-mute"></i>
@@ -33,22 +43,27 @@
                 <input id="volume" type="range" min="0" max="1" value="1" step="0.05">
             </span>
         </div>
-        <div id="waveform">
-            <div id="current" class="text-monospace" style="position: absolute; left: 18px; bottom: 0px; background-color: black; padding-left: 4px; padding-right: 4px">0:00</div>
-            <div id="duration" class="text-monospace" style="position: absolute; right: 18px; bottom: 0px; background-color: black; padding-left: 4px; padding-right: 4px">0:00</div>
+        <div class="fullMaster__playerArea">
+            <div class="fullMaster__waveform">
+                <div class="waveformWrapper">
+                    <div id="waveform">
+                        <div class="timeIdicators" id="current">0:00</div>
+                        <div class="timeIdicators" id="duration">0:00</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-3 bg-light" style="position: relative; width: 100%; padding-top: 100%;">
-        
-    </div>
 </div>
+
+<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Coreset</a>.</p>
 
 <script>
     // Set-up for wavesurfer
     var wavesurfer = WaveSurfer.create({
         container: document.querySelector('#waveform'),
         waveColor: 'White',
-        progressColor: 'Tomato',
+        progressColor: '#14ad0c',
         barWidth: 2,
         cursorWidth: 0,
         responsive: true
@@ -59,8 +74,8 @@
 
     var volumeInput = document.querySelector('#volume');
     var onChangeVolume = function (e) {
-      wavesurfer.setVolume(e.target.value);
-      console.log(e.target.value);
+        wavesurfer.setVolume(e.target.value);
+        console.log(e.target.value);
     };
 
     volumeInput.addEventListener('input', onChangeVolume);
