@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MusicPlayer.Data;
 
 namespace MusicPlayer.Data
 {
@@ -12,5 +13,8 @@ namespace MusicPlayer.Data
             : base(options)
         {
         }
-    }
+
+        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Music> Musics { get; set; }
+     }
 }
