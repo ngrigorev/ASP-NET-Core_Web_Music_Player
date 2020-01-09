@@ -11,6 +11,7 @@ namespace MusicPlayer.Data
         public string Name { get; set; }
         public string Path { get; set; }
         public string Author { get; set; }
-        public int Playlist_Id { get; set; }
+        public string Type { get; set; }
+        public DateTime UploadDate { get; set; }
     }
 }

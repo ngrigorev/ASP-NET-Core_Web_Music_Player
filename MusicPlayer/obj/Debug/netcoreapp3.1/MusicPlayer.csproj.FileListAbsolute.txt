@@ -160,8 +160,3 @@ E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Raz
 E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Details.cshtml.g.cs
 E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Edit.cshtml.g.cs
 E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Index.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Music\Create.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Music\Delete.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Music\Details.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Music\Edit.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Music\Index.cshtml.g.cs
