@@ -4,27 +4,13 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Playlist[0].Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Playlist) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="list-group" id="playlist">
+    @foreach (var item in Model.Playlist)
+    {
+            <a asp-page="./Details" asp-route-id="@item.Id" class="list-group-item list-group-item-action">
+                <i class="fas fa-play" style="padding-right: 10px"></i>
+                <span style="font-weight: 500">@Html.DisplayFor(modelItem => item.Name)</span>
+            </a>
+     }
+</div>

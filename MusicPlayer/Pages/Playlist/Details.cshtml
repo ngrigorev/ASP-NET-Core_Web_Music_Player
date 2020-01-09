@@ -1,19 +1,202 @@
 ﻿@page
 @model MusicPlayer.DetailsPlaylist
 
-<div>
-    <h4>Playlist</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Playlist.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Playlist.Name)
-        </dd>
-    </dl>
+<div class="fullMaster">
+    <div style="height: 100%;">
+        <div class="background">
+            <div class="backgroundGradient__buffer bg-light"></div>
+        </div>
+    </div>
+    <div class="fullMaster__foreground">
+        <div class="fullMaster__artwork">
+            <div class="image m-sound image__lightOutline readOnly customImage interactive sc-artwork sc-artwork-placeholder-10 m-loaded" tabindex="0" style="height: 100%; width: 100%;">
+                <span style="background-image: url(https://fanart.tv/fanart/music/c99c4be3-b183-4226-925c-b9b7ea2b0dd3/albumcover/the-witcher-original-soundtrack-52ee88f190a38.jpg); width: 100%; height: 100%; opacity: 1;" class="sc-artwork sc-artwork-placeholder-10  image__full g-opacity-transition" aria-label="Woah" aria-role="img"></span>
+            </div>
+        </div>
+        <div class="fullMaster__title">
+            <div class="soundTitle__playButton">
+                <button class="btn btn-success btn-block" id="playPause" style="height: 75px; width: 60px;">
+                    <span id="play">
+                        <span style="font-size: 1.7em;">
+                            <i class="fas fa-play"></i>
+                        </span>
+                        Play
+                    </span>
+                    <span id="pause" style="display: none">
+                        <span style="font-size: 1.7em;">
+                            <i class="fas fa-pause"></i>
+                        </span>
+                        Pause
+                    </span>
+                </button>
+            </div>
+            <div class="soundTitle__nameContainer">
+                <div class="soundTitle__creator" id="author">
+                    <a asp-page="./Edit" asp-route-id="@Model.Playlist.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@Model.Playlist.Id">Delete</a> |
+                    <a asp-page="./Index">Back to List</a>
+                </div>
+                <div class="soundTitle__title" id="name">
+                    Playlist: @Html.DisplayFor(model => model.Playlist.Name)
+                </div>
+            </div>
+        </div>
+        <div class="fullMaster__info">
+            <span style="font-size: 1.8rem;">
+                <a role="button" onclick="wavesurfer.toggleMute()" style="cursor: pointer;">
+                    <i class="fas fa-volume-mute"></i>
+                </a>
+                <input id="volume" type="range" min="0" max="1" value="1" step="0.05">
+            </span>
+        </div>
+        <div class="fullMaster__playerArea">
+            <div class="fullMaster__waveform">
+                <div class="waveformWrapper">
+                    <div id="waveform">
+                        <div class="timeIdicators" id="current" style="z-index: 4;">0:00</div>
+                        <div class="timeIdicators" id="duration" style="z-index: 4;">0:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Playlist.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
+<div style="padding-bottom: 1rem; padding-top: 1rem">
+    <button type="button" class="btn btn-success" id="previous">
+        <i class="fas fa-backward"></i> Previous
+    </button>
+    <button type="button" class="btn btn-success" id="next">
+        Next <i class="fas fa-forward"></i>
+    </button>
 </div>
+
+<div id="playlist">
+    <div class="list-group" id="playlist">
+        @foreach (var item in Model.Playlist.MusicPlaylist)
+        {
+            <a href="../audio/@Html.DisplayFor(modelItem => item.Music.File)" class="list-group-item list-group-item-action" id="song">
+                <i class="fas fa-play" style="padding-right: 10px"></i>
+                <span style="font-weight: 500">@Html.DisplayFor(modelItem => item.Music.Name)</span>
+                <span style="padding-left: 20px">by @Html.DisplayFor(modelItem => item.Music.Author)</span>
+            </a>
+        }
+    </div>
+</div>
+
+<script>
+    // Create a WaveSurfer instance
+    var wavesurfer;
+
+    // Init on DOM ready
+    document.addEventListener('DOMContentLoaded', function () {
+        wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: 'grey',
+            progressColor: '#14ad0c',
+            height: 120,
+            barWidth: 2,
+            cursorWidth: 0,
+            responsive: true
+        });
+
+        wavesurfer.setVolume(0.4);
+        document.querySelector('#volume').value = 0.4;
+    });
+
+    // Bind controls
+    document.addEventListener('DOMContentLoaded', function () {
+        var playPause = document.querySelector('#playPause');
+        playPause.addEventListener('click', function () {
+            wavesurfer.playPause();
+        });
+
+        // Toggle play/pause text
+        wavesurfer.on('play', function () {
+            document.querySelector('#play').style.display = 'none';
+            document.querySelector('#pause').style.display = '';
+        });
+        wavesurfer.on('pause', function () {
+            document.querySelector('#play').style.display = '';
+            document.querySelector('#pause').style.display = 'none';
+        });
+
+        // The playlist links
+        var links = document.querySelectorAll('#playlist a');
+        var currentTrack = 0;
+
+        // Load a track by index and highlight the corresponding link
+        var setCurrentSong = function (index) {
+            links[currentTrack].classList.remove('active');
+            currentTrack = index;
+            links[currentTrack].classList.add('active');
+            wavesurfer.load(links[currentTrack].href);
+        };
+
+        // To load the previous track from the button
+        document.getElementById("next").addEventListener("click", function () {
+            setCurrentSong((currentTrack + 1) % document.querySelectorAll('#song').length);
+        });
+
+        // To load the next track from the button
+        document.getElementById("previous").addEventListener("click", function () {
+            // To make sure that if the user hit previous on the first song it won't bug
+            if (currentTrack - 1 < 0) {
+                i = document.querySelectorAll('#song').length - 1
+            } else {
+                i = currentTrack - 1
+            }
+            setCurrentSong(i);
+        });
+
+        // Load the track on click
+        Array.prototype.forEach.call(links, function (link, index) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                setCurrentSong(index);
+            });
+        });
+
+        // Play on audio load
+        wavesurfer.on('ready', function () {
+            wavesurfer.play();
+        });
+
+        wavesurfer.on('error', function (e) {
+            console.warn(e);
+        });
+
+        // Go to the next track on finish
+        wavesurfer.on('finish', function () {
+            setCurrentSong((currentTrack + 1) % links.length);
+        });
+
+        // Load the first track
+        setCurrentSong(currentTrack);
+
+        // Volume controle
+        var volumeInput = document.querySelector('#volume');
+        var onChangeVolume = function (e) {
+            wavesurfer.setVolume(e.target.value);
+            console.log(e.target.value);
+        };
+
+        volumeInput.addEventListener('input', onChangeVolume);
+        volumeInput.addEventListener('change', onChangeVolume);
+
+        // Take a float value of time return to the 'm:ss' format
+        var formatTime = function (timeValue) {
+            return Math.trunc(timeValue / 60) + ':' + ('0' + Math.trunc(timeValue % 60)).slice(-2)
+        }
+
+        // Update current sound duration
+        wavesurfer.on('ready', function () {
+            document.getElementById("duration").innerHTML = formatTime(wavesurfer.getDuration())
+        });
+
+        // Update current sound cursor
+        wavesurfer.on('audioprocess', function () {
+            document.getElementById("current").innerHTML = formatTime(wavesurfer.getCurrentTime())
+        });
+    });
+</script>

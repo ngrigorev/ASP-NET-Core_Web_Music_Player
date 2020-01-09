@@ -27,7 +27,13 @@ namespace MusicPlayer
                 return NotFound();
             }
 
-            Playlist = await _context.Playlists.FirstOrDefaultAsync(m => m.Id == id);
+            //Playlist = await _context.Playlists.FirstOrDefaultAsync(m => m.Id == id);
+
+            Playlist = await _context.Playlists
+                .Include(s => s.MusicPlaylist)
+                    .ThenInclude(g => g.Music)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Playlist == null)
             {
