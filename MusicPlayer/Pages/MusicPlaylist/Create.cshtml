@@ -1,0 +1,31 @@
+﻿@page
+@model MusicPlayer.CreateMusicPlaylist
+
+<h4>MusicPlaylist</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MusicPlaylist.MusicId" class="control-label"></label>
+                <select asp-for="MusicPlaylist.MusicId" class ="form-control" asp-items="ViewBag.MusicId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusicPlaylist.PlaylistId" class="control-label"></label>
+                <select asp-for="MusicPlaylist.PlaylistId" class ="form-control" asp-items="ViewBag.PlaylistId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

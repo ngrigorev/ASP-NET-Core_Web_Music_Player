@@ -25,7 +25,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Music/Index">Music</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Playlist/Index">Playlist</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/MusicPlaylist/Index">Add to playlist</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-link custom-control custom-switch" style="padding-left: 50px;">
+                                <input type="checkbox" class="custom-control-input" id="darkSwitch" onclick="DarkFunction()" />
+                                <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                            </div>
                         </li>
                     </ul>
                 </div>

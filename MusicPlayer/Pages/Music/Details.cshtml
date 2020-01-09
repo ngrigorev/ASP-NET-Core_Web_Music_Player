@@ -1,0 +1,104 @@
+﻿@page
+@model MusicPlayer.DetailsMusic
+@{
+    ViewData["Title"] = "Play Music";
+}
+
+<div class="fullMaster text-dark">
+    <div style="height: 100%;">
+        <div class="background">
+            <div class="backgroundGradient__buffer bg-light"></div>
+        </div>
+    </div>
+    <div class="fullMaster__foreground">
+        <div class="fullMaster__artwork">
+            <div class="image m-sound image__lightOutline readOnly customImage interactive sc-artwork sc-artwork-placeholder-10 m-loaded" tabindex="0" style="height: 100%; width: 100%;">
+                <span style="background-image: url(https://fanart.tv/fanart/music/c99c4be3-b183-4226-925c-b9b7ea2b0dd3/albumcover/the-witcher-original-soundtrack-52ee88f190a38.jpg); width: 100%; height: 100%; opacity: 1;" class="sc-artwork sc-artwork-placeholder-10  image__full g-opacity-transition" aria-label="Woah" aria-role="img"></span>
+            </div>
+        </div>
+        <div class="fullMaster__title">
+            <div class="soundTitle__playButton">
+                <a role="button" onclick="wavesurfer.playPause()" style="cursor: pointer;">
+                    <span style="font-size: 3rem; color: #14ad0c;">
+                        <i class="fas fa-play-circle"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="soundTitle__nameContainer">
+                <div class="soundTitle__creator">
+                    @Html.DisplayFor(model => model.Music.Author)
+                </div>
+                <div class="soundTitle__title">
+                    @Html.DisplayFor(model => model.Music.Name)
+                </div>
+            </div>
+        </div>
+        <div class="fullMaster__info">
+            <div class="fullMaster__info__type">
+                @Html.DisplayFor(model => model.Music.Type)
+            </div>
+            <span style="font-size: 1.8rem;">
+                <a role="button" onclick="wavesurfer.toggleMute()" style="cursor: pointer;">
+                    <i class="fas fa-volume-mute"></i>
+                </a>
+                <input id="volume" type="range" min="0" max="1" value="1" step="0.05">
+            </span>
+        </div>
+        <div class="fullMaster__playerArea">
+            <div class="fullMaster__waveform">
+                <div class="waveformWrapper">
+                    <div id="waveform">
+                        <div class="timeIdicators" id="current">0:00</div>
+                        <div class="timeIdicators" id="duration">0:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Music.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+<script>
+    // Set-up for wavesurfer
+    var wavesurfer = WaveSurfer.create({
+        container: document.querySelector('#waveform'),
+        waveColor: 'grey',
+        progressColor: '#14ad0c',
+        barWidth: 2,
+        cursorWidth: 0,
+        responsive: true
+    });
+
+    wavesurfer.setVolume(0.4);
+    document.querySelector('#volume').value = 0.4;
+
+    var volumeInput = document.querySelector('#volume');
+    var onChangeVolume = function (e) {
+        wavesurfer.setVolume(e.target.value);
+        console.log(e.target.value);
+    };
+
+    volumeInput.addEventListener('input', onChangeVolume);
+    volumeInput.addEventListener('change', onChangeVolume);
+
+    // Loading audio file
+    wavesurfer.load("../audio/@Html.DisplayFor(model => model.Music.File)");
+
+    // Take a float value of time return to the 'm:ss' format
+    var formatTime = function (timeValue) {
+        return Math.trunc(timeValue / 60) + ':' + ('0' + Math.trunc(timeValue % 60)).slice(-2)
+    }
+
+    // Update current sound duration
+    wavesurfer.on('ready', function () {
+        document.getElementById("duration").innerHTML = formatTime(wavesurfer.getDuration())
+    });
+
+    // Update current sound cursor
+    wavesurfer.on('audioprocess', function () {
+        document.getElementById("current").innerHTML = formatTime(wavesurfer.getCurrentTime())
+    });
+</script>

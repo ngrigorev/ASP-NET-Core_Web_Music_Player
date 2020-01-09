@@ -4,18 +4,16 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="fullMaster text-light">
+<div class="fullMaster text-dark">
     <div style="height: 100%;">
-        <div class="backgroundGradient">
-            <div class="backgroundGradient__buffer backgroundGradient__hidden"></div>
-            <div class="backgroundGradient__buffer bg-dark"></div>
-            <div class="backgroundGradient__imageOverlay"></div>
+        <div class="background">
+            <div class="backgroundGradient__buffer bg-light"></div>
         </div>
     </div>
     <div class="fullMaster__foreground">
         <div class="fullMaster__artwork">
             <div class="image m-sound image__lightOutline readOnly customImage interactive sc-artwork sc-artwork-placeholder-10 m-loaded" tabindex="0" style="height: 100%; width: 100%;">
-                <span style="background-image: url(https://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Visual_Principal_340/8/5/7/0600753012758/tsp20120923065845/Generation-zouk.jpg); width: 100%; height: 100%; opacity: 1;" class="sc-artwork sc-artwork-placeholder-10  image__full g-opacity-transition" aria-label="Woah" aria-role="img"></span>
+                <span style="background-image: url(https://fanart.tv/fanart/music/c99c4be3-b183-4226-925c-b9b7ea2b0dd3/albumcover/the-witcher-original-soundtrack-52ee88f190a38.jpg); width: 100%; height: 100%; opacity: 1;" class="sc-artwork sc-artwork-placeholder-10  image__full g-opacity-transition" aria-label="Woah" aria-role="img"></span>
             </div>
         </div>
         <div class="fullMaster__title">
@@ -31,7 +29,7 @@
                     Johnny le Dep
                 </div>
                 <div class="soundTitle__title">
-                    Génération Zouk !
+                    Cowbell
                 </div>
             </div>
         </div>
@@ -56,13 +54,11 @@
     </div>
 </div>
 
-<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Coreset</a>.</p>
-
 <script>
     // Set-up for wavesurfer
     var wavesurfer = WaveSurfer.create({
         container: document.querySelector('#waveform'),
-        waveColor: 'White',
+        waveColor: 'grey',
         progressColor: '#14ad0c',
         barWidth: 2,
         cursorWidth: 0,

@@ -14,7 +14,14 @@ namespace MusicPlayer.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<MusicPlaylist>().HasKey(sc => new { sc.MusicId, sc.PlaylistId });
+        }
+
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<Music> Musics { get; set; }
-     }
+        public DbSet<MusicPlaylist> MusicPlaylist { get; set; }
+    }
 }
