@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MusicPlayer.Data
 {
@@ -9,9 +6,10 @@ namespace MusicPlayer.Data
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Path { get; set; }
+        public string File { get; set; }
         public string Author { get; set; }
         public string Type { get; set; }
-        public DateTime UploadDate { get; set; }
+
+        public IList<MusicPlaylist> MusicPlaylist { get; set; }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace MusicPlayer.Data
 {
@@ -9,6 +7,9 @@ namespace MusicPlayer.Data
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Music> Musics { get; set; }
+        // To link the playlist to the user
+        public IdentityUser User { get; set; }
+
+        public IList<MusicPlaylist> MusicPlaylist { get; set; }
     }
 }

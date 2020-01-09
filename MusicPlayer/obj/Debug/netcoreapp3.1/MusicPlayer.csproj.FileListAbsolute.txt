@@ -155,8 +155,3 @@ E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\bin\Debug\netcoreapp3.1\run
 E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\MusicPlayer.MvcApplicationPartsAssemblyInfo.cs
 E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\MusicPlayer.MvcApplicationPartsAssemblyInfo.cache
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Create.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Delete.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Details.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Edit.cshtml.g.cs
-E:\dev\git\ASP-NET-Core_Web_Music_Player\MusicPlayer\obj\Debug\netcoreapp3.1\Razor\Pages\Playlist\Index.cshtml.g.cs
