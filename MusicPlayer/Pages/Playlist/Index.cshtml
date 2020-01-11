@@ -1,16 +1,19 @@
 ﻿@page
 @model MusicPlayer.IndexPlaylist
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<h2 style="margin-top: 25px">
+    All Playlists
+    <a class="btn btn-success" asp-page="Create"><i class="fas fa-plus"></i> Create New</a>
+    <a class="btn btn-success" asp-page="../MusicPlaylist/Create"><i class="fas fa-plus"></i> Add Music to Playlist</a>
+</h2>
 
 <div class="list-group" id="playlist">
     @foreach (var item in Model.Playlist)
     {
-            <a asp-page="./Details" asp-route-id="@item.Id" class="list-group-item list-group-item-action">
-                <i class="fas fa-play" style="padding-right: 10px"></i>
-                <span style="font-weight: 500">@Html.DisplayFor(modelItem => item.Name)</span>
-            </a>
-     }
+    <a asp-page="./Details" asp-route-id="@item.Id" class="list-group-item list-group-item-action">
+        <i class="fas fa-play" style="padding-right: 10px"></i>
+        <span style="font-weight: 500; padding-right: 15px">@Html.DisplayFor(modelItem => item.Name)</span>
+        ( ID: @Html.DisplayFor(modelItem => item.Id) )
+    </a>
+    }
 </div>

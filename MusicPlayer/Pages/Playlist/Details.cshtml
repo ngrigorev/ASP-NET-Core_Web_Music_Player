@@ -32,9 +32,9 @@
             </div>
             <div class="soundTitle__nameContainer">
                 <div class="soundTitle__creator" id="author">
-                    <a asp-page="./Edit" asp-route-id="@Model.Playlist.Id">Edit</a> |
-                    <a asp-page="./Delete" asp-route-id="@Model.Playlist.Id">Delete</a> |
-                    <a asp-page="./Index">Back to List</a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Playlist.Id"><i class="fas fa-edit"></i> Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@Model.Playlist.Id"><i class="fas fa-trash-alt"></i> Delete</a> |
+                    <a asp-page="./Index"><i class="fas fa-arrow-left"></i> Back to List</a>
                 </div>
                 <div class="soundTitle__title" id="name">
                     Playlist: @Html.DisplayFor(model => model.Playlist.Name)
@@ -43,10 +43,13 @@
         </div>
         <div class="fullMaster__info">
             <span style="font-size: 1.8rem;">
-                <a role="button" onclick="wavesurfer.toggleMute()" style="cursor: pointer;">
-                    <i class="fas fa-volume-mute"></i>
-                </a>
-                <input id="volume" type="range" min="0" max="1" value="1" step="0.05">
+                <button class="btn btn-success btn-block" id="muteUnmute" >
+                    <span id="mute">
+                        <i class="fas fa-volume-mute"></i>
+                        Mute
+                    </span>
+                </button>
+                <input id="volume" type="range" min="0" max="1" value="1" step="0.05" style="width: 100%">
             </span>
         </div>
         <div class="fullMaster__playerArea">
@@ -119,6 +122,11 @@
         wavesurfer.on('pause', function () {
             document.querySelector('#play').style.display = '';
             document.querySelector('#pause').style.display = 'none';
+        });
+
+        var playPause = document.querySelector('#muteUnmute');
+        playPause.addEventListener('click', function () {
+            wavesurfer.toggleMute();
         });
 
         // The playlist links

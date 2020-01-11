@@ -1,12 +1,17 @@
 ﻿@page
 @model MusicPlayer.IndexMusic
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<h2 style="margin-top: 25px">
+    All Musics
+    <a class="btn btn-success" asp-page="Create"><i class="fas fa-plus"></i> Create New</a>
+    <a class="btn btn-success" asp-page="../MusicPlaylist/Create"><i class="fas fa-plus"></i> Add Music to Playlist</a>
+</h2>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Music[0].Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Music[0].Name)
             </th>
@@ -26,10 +31,18 @@
 @foreach (var item in Model.Music) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.File)
+                <a asp-page="./Details" asp-route-id="@item.Id">
+                    <i class="fas fa-play" style="padding-right: 10px"></i>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </a>
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.File)
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Author)
@@ -38,9 +51,9 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id"><i class="fas fa-play"></i> Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i> Delete</a>
             </td>
         </tr>
 }
